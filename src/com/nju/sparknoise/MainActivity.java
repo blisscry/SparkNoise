@@ -455,7 +455,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 				public void run() {
 					System.exit(0);
 				}
-			}, 200);
+			}, 500);
 			
 //			   延时还有如下两种方式
 //				一、线程
