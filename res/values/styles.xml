@@ -4,6 +4,7 @@
     <style name="CustomActionBarTheme"
            parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item>
 
     </style>
 
@@ -16,7 +17,15 @@
     </style>
     <style name="MyTitleStyle"
            parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title.Inverse">
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20dp</item>
+    </style>
+    
+        <!-- ActionBar tabs text styles -->
+    <style name="MyActionBarTabText"
+           parent="@android:style/Widget.Holo.ActionBar.TabText">
+        <item name="android:textColor">@color/seashell</item>
+        <item name="android:textSize">20sp</item>
     </style>
     
     <declare-styleable name="MaterialMenuView">

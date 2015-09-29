@@ -10,8 +10,8 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.MaterialMenuDrawable.Stroke;
@@ -23,9 +23,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -49,6 +52,8 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+    //用户设置连续点击返回退出的初始值
+    private long exitTime=0;
 	
 	/** DrawerLayout */
 	private DrawerLayout mDrawerLayout;
@@ -84,6 +89,15 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     private double centre_lati_xianlin=32.123852;
     private double centre_longi_xianlin=118.965212;
     
+    /*
+     * 2015年9月6日21:39:06
+     * 添加鼓楼校区地图许可
+     * 地图左上角边缘经、纬度：118.780700、32.065296
+     * 地图左下角边缘经、纬度：118.780700、32.056246
+     * 地图右上角边缘经、纬度：118.790600、32.065296
+     * 地图右下角边缘经、纬度：118.790600、32.056246
+     */
+    
     //定位相关
  	LocationClient mLocClient;
  	public MyLocationListenner myListener = new MyLocationListenner();
@@ -97,7 +111,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
  	OnCheckedChangeListener radioButtonListener;
  	Button requestLocButton;
  	boolean isFirstLoc = true;//是否首次定位
-    
     
 
 	@Override
@@ -136,6 +149,62 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 //		if (savedInstanceState == null) {
 //			selectItem(0);
 //		}
+		
+//      requestLocButton = (Button) findViewById(R.id.button1);
+//		mCurrentMode = LocationMode.NORMAL;
+//		requestLocButton.setText("普通");
+////		requestLocButton.setba
+//		OnClickListener btnClickListener = new OnClickListener() {
+//			public void onClick(View v) {
+//				switch (mCurrentMode) {
+//				case NORMAL:
+//					requestLocButton.setText("跟随");
+//					mCurrentMode = LocationMode.FOLLOWING;
+//					mBaiduMap
+//							.setMyLocationConfigeration(new MyLocationConfiguration(
+//									mCurrentMode, true, mCurrentMarker));
+//					break;
+//				case COMPASS:
+//					requestLocButton.setText("普通");
+//					mCurrentMode = LocationMode.NORMAL;
+//					mBaiduMap
+//							.setMyLocationConfigeration(new MyLocationConfiguration(
+//									mCurrentMode, true, mCurrentMarker));
+//					break;
+//				case FOLLOWING:
+//					requestLocButton.setText("罗盘");
+//					mCurrentMode = LocationMode.COMPASS;
+//					mBaiduMap
+//							.setMyLocationConfigeration(new MyLocationConfiguration(
+//									mCurrentMode, true, mCurrentMarker));
+//					break;
+//				}
+//			}
+//		};
+//		requestLocButton.setOnClickListener(btnClickListener);
+//
+//		RadioGroup group = (RadioGroup) this.findViewById(R.id.radioGroup);
+//		radioButtonListener = new OnCheckedChangeListener() {
+//			@Override
+//			public void onCheckedChanged(RadioGroup group, int checkedId) {
+//				if (checkedId == R.id.defaulticon) {
+//					// 传入null则，回复默认图标
+//					mCurrentMarker = null;
+//					mBaiduMap
+//							.setMyLocationConfigeration(new MyLocationConfiguration(
+//									mCurrentMode, true, null));
+//				}
+//				if (checkedId == R.id.customicon) {
+//					// 修改为自定义marker
+//					mCurrentMarker = BitmapDescriptorFactory
+//							.fromResource(R.drawable.icon_geo);
+//					mBaiduMap
+//							.setMyLocationConfigeration(new MyLocationConfiguration(
+//									mCurrentMode, true, mCurrentMarker));
+//				}
+//			}
+//		};
+//		group.setOnCheckedChangeListener(radioButtonListener);
 		
 		// 地图初始化
 		mMapView = (MapView) findViewById(R.id.bmapView);
@@ -364,4 +433,53 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		}
 	}
 
+	
+    //==========================================================================================
+    //设置连续点击两次返回键退出程序
+    @Override
+    public boolean onKeyDown(int keyCode,KeyEvent event){
+    	if(keyCode==KeyEvent.KEYCODE_BACK){
+    		exit();
+		return false;
+    	}
+    	return super.onKeyDown(keyCode, event);
+    }
+    
+    private void exit(){
+    	if((System.currentTimeMillis()-exitTime)>2000){
+    		Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+    		exitTime = System.currentTimeMillis();
+    	}else{
+    		finish();
+    		new Handler().postDelayed(new Runnable() {
+				public void run() {
+					System.exit(0);
+				}
+			}, 200);
+			
+//			   延时还有如下两种方式
+//				一、线程
+//				new Thread(new Runnable(){    
+//				     public void run(){    
+//				         Thread.sleep(XXXX);    
+//				         handler.sendMessage();----告诉主线程执行任务
+//				     }    
+//				 }).start    
+//				二、延时器
+//				TimerTask task = new TimerTask(){    
+//				     public void run(){    
+//				     //execute the task     
+//				     }    
+//				 };    
+//				Timer timer = new Timer();  
+//				   timer.schedule(task, delay);  
+			
+			
+			//立刻杀死进程
+//    		System.exit(0);
+    		//或者如下
+//    		android.os.Process.killProcess(android.os.Process.myPid());  
+    	}
+    }
+    //==========================================================================================
 }
