@@ -38,6 +38,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ZoomControls;
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -226,7 +227,21 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		//此处的zoom为设置地图缩放等级，经多次对比调试以后float16.3为最佳缩放水平
 		mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom((float) 16.3).build()));
 		
+		//以下为去除百度地图logo以及比例尺
+		mMapView.removeViewAt(1);
+		mMapView.removeViewAt(2);
 		
+		// 隐藏缩放控件
+		int childCount = mMapView.getChildCount();
+		View zoom = null;
+		for (int i = 0; i < childCount; i++) {
+			View child = mMapView.getChildAt(i);
+			if (child instanceof ZoomControls) {
+				zoom = child;
+				break;
+			}
+		}
+		zoom.setVisibility(View.GONE);
 	}
 	
 	
