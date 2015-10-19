@@ -1,6 +1,10 @@
-package com.nju.sparknoise;
+package com.nju.sparknoise.mainUI;
 
 import java.util.List;
+
+import com.nju.sparknoise.R;
+import com.nju.sparknoise.R.id;
+import com.nju.sparknoise.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;

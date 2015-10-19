@@ -1,4 +1,4 @@
-package com.nju.sparknoise;
+package com.nju.sparknoise.mainUI;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -15,6 +15,12 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.MaterialMenuDrawable.Stroke;
+import com.nju.sparknoise.R;
+import com.nju.sparknoise.R.drawable;
+import com.nju.sparknoise.R.id;
+import com.nju.sparknoise.R.layout;
+import com.nju.sparknoise.R.menu;
+import com.nju.sparknoise.mainUI.NavigationDrawerFragment.NavigationDrawerCallbacks;
 import com.balysv.materialmenu.MaterialMenuIcon;
 
 import android.app.ActionBar;

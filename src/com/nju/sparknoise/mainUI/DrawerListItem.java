@@ -1,4 +1,4 @@
-package com.nju.sparknoise;
+package com.nju.sparknoise.mainUI;
 
 import android.graphics.drawable.Drawable;
 

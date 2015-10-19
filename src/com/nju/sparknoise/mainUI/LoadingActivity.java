@@ -1,6 +1,13 @@
-package com.nju.sparknoise;
+package com.nju.sparknoise.mainUI;
 
 import java.util.Timer;
+
+import com.nju.sparknoise.R;
+import com.nju.sparknoise.R.anim;
+import com.nju.sparknoise.R.drawable;
+import com.nju.sparknoise.R.id;
+import com.nju.sparknoise.R.layout;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -88,7 +95,7 @@ public class LoadingActivity extends Activity{
 
 	    //…Ë÷√—” ±
 	    Handler x = new Handler();
-	    x.postDelayed(new SplashHandler(), 2000);
+	    x.postDelayed(new SplashHandler(), 1000);
 	}
 	
 	class SplashHandler implements Runnable{

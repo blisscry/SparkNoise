@@ -1,7 +1,15 @@
-package com.nju.sparknoise;
+package com.nju.sparknoise.mainUI;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.nju.sparknoise.R;
+import com.nju.sparknoise.R.array;
+import com.nju.sparknoise.R.drawable;
+import com.nju.sparknoise.R.id;
+import com.nju.sparknoise.R.layout;
+import com.nju.sparknoise.R.menu;
+import com.nju.sparknoise.R.string;
 
 import android.app.ActionBar;
 import android.app.Activity;
