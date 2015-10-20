@@ -61,7 +61,8 @@
             />
         <activity
             android:name="com.nju.sparknoise.mainUI.LoadingActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.start" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

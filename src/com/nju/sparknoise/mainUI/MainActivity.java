@@ -1,5 +1,7 @@
 package com.nju.sparknoise.mainUI;
 
+import java.util.ArrayList;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -12,17 +14,16 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.PolygonOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.MaterialMenuDrawable.Stroke;
-import com.nju.sparknoise.R;
-import com.nju.sparknoise.R.drawable;
-import com.nju.sparknoise.R.id;
-import com.nju.sparknoise.R.layout;
-import com.nju.sparknoise.R.menu;
-import com.nju.sparknoise.mainUI.NavigationDrawerFragment.NavigationDrawerCallbacks;
 import com.balysv.materialmenu.MaterialMenuIcon;
+import com.nju.sparknoise.R;
+import com.nju.sparknoise.baidumap.NoiseOverlay;
 
+//import com.baidu.mapapi.map.Stroke;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -248,6 +249,8 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			}
 		}
 		zoom.setVisibility(View.GONE);
+		
+		new NoiseOverlay(mBaiduMap);
 	}
 	
 	
