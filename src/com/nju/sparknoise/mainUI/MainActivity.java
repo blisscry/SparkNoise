@@ -28,6 +28,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -250,7 +251,9 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		}
 		zoom.setVisibility(View.GONE);
 		
-		new NoiseOverlay(mBaiduMap);
+		
+		Resources resource = getResources();
+		new NoiseOverlay(mBaiduMap,resource);
 	}
 	
 	
@@ -267,12 +270,12 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			
 			double templati=location.getLatitude();
 			double templongi=location.getLongitude();
-			Log.v("initial", templati+"--"+templongi);
+//			Log.v("initial", templati+"--"+templongi);
 			if(!(templati>leftdown_lati_xianlin&&templati<leftup_lati_xianlin&&templongi>leftdown_longi_xianlin&&templongi<rightdown_longi_xianlin)){
 				templati=centre_lati_xianlin;
 				templongi=centre_longi_xianlin;
 			}
-			Log.v("afterjudge", templati+"--"+templongi);
+//			Log.v("afterjudge", templati+"--"+templongi);
 			MyLocationData locData = new MyLocationData.Builder()
 					.accuracy(location.getRadius())
 					// 此处设置开发者获取到的方向信息，顺时针0-360
