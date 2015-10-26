@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Polygon;
 import com.baidu.mapapi.map.PolygonOptions;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
@@ -19,8 +22,11 @@ public class NoiseOverlay{
 	 * this class aim to make noise overlay on the map
 	 */
 	
+	//定义存放地图分区的块列表
 	ArrayList<ArrayList<String>> blocks = new ArrayList<ArrayList<String>>();
+	//定义每个块顶点的经纬度列表
 	ArrayList<String> tempblock = new ArrayList<String>();
+	//定义循环给地图块涂色的颜色列表,
 	int[] mapcolor={0xA047abec,0xA07ac940,0xA0c73e8a,0xA0f19149};
 	
 public NoiseOverlay(BaiduMap mBaiduMap , Resources resource) {
@@ -65,7 +71,8 @@ public NoiseOverlay(BaiduMap mBaiduMap , Resources resource) {
 		    .stroke(new Stroke(1, mapcolor[i]))  
 		    .fillColor(mapcolor[i]);
 		//在地图上添加多边形Option，用于显示  
-		mBaiduMap.addOverlay(polygonOption);
+		Marker marker=(Marker) mBaiduMap.addOverlay(polygonOption);
+		
 		
 		if(i==3){
 			i=0;
@@ -74,27 +81,6 @@ public NoiseOverlay(BaiduMap mBaiduMap , Resources resource) {
 	}
 	
 	
-//	LatLng A = new LatLng(32.120539, 118.965421);
-//	LatLng B = new LatLng(32.120792, 118.967784);
-//	LatLng C = new LatLng(32.119156, 118.968718);
-//	LatLng D = new LatLng(32.118712, 118.964909);
-//	LatLng E = new LatLng(32.119859, 118.965269);
-//	LatLng F = new LatLng(32.119805, 118.965682);
-//	
-//	ArrayList<LatLng> pts = new ArrayList<LatLng>();
-//	pts.add(A);
-//	pts.add(B);
-//	pts.add(C);
-//	pts.add(D);
-//	pts.add(E);
-//	pts.add(F);
-//	
-//	//构建用户绘制多边形的Option对象  
-//	OverlayOptions polygonOption = new PolygonOptions()  
-//	    .points(pts)  
-//	    .stroke(new Stroke(3, 0xAA00FF00))  
-//	    .fillColor(0xAA6d9eeb);
-//	//在地图上添加多边形Option，用于显示  
-//	mBaiduMap.addOverlay(polygonOption);
+	
 }
 }
