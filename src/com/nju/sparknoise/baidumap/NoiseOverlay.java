@@ -11,11 +11,13 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Polygon;
 import com.baidu.mapapi.map.PolygonOptions;
+import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.nju.sparknoise.R;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 public class NoiseOverlay{
 	/**
@@ -64,6 +66,7 @@ public NoiseOverlay(BaiduMap mBaiduMap , Resources resource) {
 			pts.add(Dot);
 		}
 		
+		Log.v("isrunnable?", "yes");
 		
 		//构建用户绘制多边形的Option对象  
 		OverlayOptions polygonOption = new PolygonOptions()  
@@ -71,8 +74,9 @@ public NoiseOverlay(BaiduMap mBaiduMap , Resources resource) {
 		    .stroke(new Stroke(1, mapcolor[i]))  
 		    .fillColor(mapcolor[i]);
 		//在地图上添加多边形Option，用于显示  
-		Marker marker=(Marker) mBaiduMap.addOverlay(polygonOption);
+//		Marker marker=(Marker) mBaiduMap.addOverlay(polygonOption);
 		
+		mBaiduMap.addOverlay(polygonOption);
 		
 		if(i==3){
 			i=0;

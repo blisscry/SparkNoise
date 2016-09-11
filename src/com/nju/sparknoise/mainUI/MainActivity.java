@@ -1,7 +1,5 @@
 package com.nju.sparknoise.mainUI;
 
-import java.util.ArrayList;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -14,32 +12,33 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.PolygonOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.MaterialMenuDrawable.Stroke;
 import com.balysv.materialmenu.MaterialMenuIcon;
 import com.nju.sparknoise.R;
 import com.nju.sparknoise.baidumap.NoiseOverlay;
+import com.nju.sparknoise.charts.LineChart;
 
 //import com.baidu.mapapi.map.Stroke;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
@@ -120,12 +119,16 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
  	OnCheckedChangeListener radioButtonListener;
  	Button requestLocButton;
  	boolean isFirstLoc = true;//是否首次定位
+ 	
+ 	Context MainContext;
     
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		MainContext=this;
 		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
@@ -254,6 +257,17 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		
 		Resources resource = getResources();
 		new NoiseOverlay(mBaiduMap,resource);
+		
+		
+//		Button button =(Button) findViewById(R.id.button);
+//		button.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent=new LineChart("噪音水平").generateChart(MainContext);
+//				startActivity(intent);
+//			}
+//		});
 	}
 	
 	
